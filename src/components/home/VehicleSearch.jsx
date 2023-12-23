@@ -1,5 +1,37 @@
 import carAbstract from '/images/car-abstract.png';
 
+const selectOptions = [
+  {
+    title: 'Select Make:',
+    options: ['nissan', 'dodge', 'subaru'],
+  },
+  {
+    title: 'Select Model:',
+    options: ['grand caravan', 'nx', 'subaru'],
+  },
+  {
+    title: 'Select Year:',
+    options: [
+      '2023',
+      '2022',
+      '2021',
+      '2020',
+      '2019',
+      '2018',
+      '2017',
+      '2016',
+      '2015',
+      '2014',
+      '2013',
+      '2012',
+      '2011',
+    ],
+  },
+];
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+};
 const VehicleSearch = () => {
   return (
     <div className="bg-white">
@@ -14,33 +46,42 @@ const VehicleSearch = () => {
           <img src={carAbstract} alt="" />
         </div>
         <div className="bg-primary col-span-10 h-full flex items-center px-4 md:px-10">
-          <div className="flex justify-start items-center">
-            <form className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-              <div className="flex flex-col w-full">
-                <label
-                  htmlFor="make"
-                  className="text-white font-semibold font-secondary"
-                >
-                  Select Make:
-                </label>
-                <select
-                  name="make"
-                  id="make"
-                  className="bg-white border-0 w-full"
-                >
-                  <option className="uppercase" value="nissan">
-                    nissan
-                  </option>
-                  <option className="uppercase" value="dodge">
-                    dodge
-                  </option>
-                  <option className="uppercase" value="subaru">
-                    subaru
-                  </option>
-                </select>
-              </div>
-            </form>
-          </div>
+          <form className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 items-end w-full">
+            {selectOptions.map((item, i) => {
+              const { title, options } = item;
+              return (
+                <div className="flex flex-col w-full" key={i}>
+                  <label
+                    htmlFor={title}
+                    className="text-white font-semibold font-secondary mb-2"
+                  >
+                    {title}
+                  </label>
+                  <select
+                    required
+                    name={title}
+                    id={title}
+                    className="bg-white p-3 rounded-lg focus:border-0 focus:outline-none w-full"
+                  >
+                    {options.map((option, j) => (
+                      <option className="uppercase" value={option} key={j}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              );
+            })}
+
+            <div>
+              <button
+                type="submit"
+                className="border border-white px-8 py-3 rounded-full text-white font-medium hover:bg-white hover:text-primary duration-500"
+              >
+                Search the vehicle
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
