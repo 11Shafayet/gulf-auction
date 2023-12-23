@@ -17,7 +17,6 @@ import 'swiper/css/navigation';
 // import required modules
 import { Navigation } from 'swiper/modules';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import CarItem from '../loaders/CarItemLoader';
 import { useState } from 'react';
 import CarItemLoader from '../loaders/CarItemLoader';
 
