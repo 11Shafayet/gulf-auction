@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import carAbstract from '/images/car-abstract.png';
 
 const selectOptions = [
@@ -29,26 +30,46 @@ const selectOptions = [
   },
 ];
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-};
 const VehicleSearch = () => {
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState('');
+  const [year, setYear] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (make && model && year) {
+      console.log(make, model, year);
+    } else {
+      alert('Please select all the field');
+    }
+  };
   return (
     <div className="bg-white">
       <div className="grid grid-cols-12 gap-0">
-        <div className="relative col-span-2 px-4">
+        <div className="relative hidden md:flex justify-center items-center md:col-span-2 px-4">
           <div
             className="absolute top-0 bottom-0 -right-0.5 h-full w-full bg-primary"
             style={{
               clipPath: `polygon(80% 0, 100% 0%, 100% 100%, 80% 100%, 97% 50%)`,
             }}
           />
-          <img src={carAbstract} alt="" />
+          <img src={carAbstract} alt="" className="w-full" />
         </div>
-        <div className="bg-primary col-span-10 h-full flex items-center px-4 md:px-10">
-          <form className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 items-end w-full">
+        <div className="bg-primary col-span-12 md:col-span-10 h-full flex items-center px-4 md:px-10 py-12">
+          <form
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 items-end w-full"
+            onSubmit={handleSubmit}
+          >
             {selectOptions.map((item, i) => {
               const { title, options } = item;
+              const stateSetter =
+                title === 'Select Make:'
+                  ? setMake
+                  : title === 'Select Model:'
+                  ? setModel
+                  : setYear;
+
               return (
                 <div className="flex flex-col w-full" key={i}>
                   <label
@@ -61,6 +82,14 @@ const VehicleSearch = () => {
                     required
                     name={title}
                     id={title}
+                    value={
+                      title === 'Select Make:'
+                        ? make
+                        : title === 'Select Model:'
+                        ? model
+                        : year
+                    }
+                    onChange={(e) => stateSetter(e.target.value)}
                     className="bg-white p-3 rounded-lg focus:border-0 focus:outline-none w-full"
                   >
                     {options.map((option, j) => (
