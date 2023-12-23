@@ -17,6 +17,9 @@ import 'swiper/css/navigation';
 // import required modules
 import { Navigation } from 'swiper/modules';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import CarItem from '../loaders/CarItemLoader';
+import { useState } from 'react';
+import CarItemLoader from '../loaders/CarItemLoader';
 
 const data = [
   {
@@ -52,6 +55,8 @@ const data = [
 ];
 
 const PopularCars = () => {
+  const [loading, setLoading] = useState(false);
+
   return (
     <div className="pt-32 pb-20">
       <div className="container mx-auto px-4">
@@ -74,54 +79,74 @@ const PopularCars = () => {
 
         {/* cars */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          {data?.map((item, i) => {
-            const { images, title, count } = item;
+          {loading ? (
+            <>
+              <CarItemLoader />
+              <CarItemLoader />
+              <CarItemLoader />
+              <CarItemLoader />
+              <CarItemLoader />
+              <CarItemLoader />
+            </>
+          ) : (
+            <>
+              {data?.length === 0 ? (
+                <p className="text-lg font-medium">No Product Found!</p>
+              ) : (
+                <>
+                  {' '}
+                  {data?.map((item, i) => {
+                    const { images, title, count } = item;
 
-            return (
-              <div key={i}>
-                <Swiper
-                  modules={[Navigation]}
-                  //   navigation={{ nextEl: '.arrow-right', prevEl: '.arrow-left' }}
-                  navigation={true}
-                  className="mySwiper relative overflow-hidden"
-                >
-                  {/* <div className="flex gap-x-4 justify-center items-center absolute top-4 right-4 z-100">
-                    <button className="arrow-left">
-                      <FaArrowLeft size={20} />
-                    </button>
-
-                    <button className="arrow-right">
-                      <FaArrowRight size={20} />
-                    </button>
-                  </div> */}
-                  {images.map((car, j) => (
-                    <SwiperSlide
-                      key={j}
-                      className="relative z-10 w-full rounded-2xl overflow-hidden"
-                    >
-                      <div className="absolute inset-0 -z-10 text-center bg-black bg-opacity-10" />
-                      <div className="flex justify-center items-center -z-20 relative">
-                        <img src={car.img} alt="" />
+                    return (
+                      <div key={i}>
+                        <Swiper
+                          modules={[Navigation]}
+                          //   navigation={{ nextEl: '.arrow-right', prevEl: '.arrow-left' }}
+                          navigation={true}
+                          className="mySwiper relative overflow-hidden"
+                        >
+                          {/* <div className="flex gap-x-4 justify-center items-center absolute top-4 right-4 z-100">
+                          <button className="arrow-left">
+                            <FaArrowLeft size={20} />
+                          </button>
+      
+                          <button className="arrow-right">
+                            <FaArrowRight size={20} />
+                          </button>
+                        </div> */}
+                          {images.map((car, j) => (
+                            <SwiperSlide
+                              key={j}
+                              className="relative z-10 w-full rounded-2xl overflow-hidden"
+                            >
+                              <div className="absolute inset-0 -z-10 text-center bg-black bg-opacity-10" />
+                              <div className="flex justify-center items-center -z-20 relative">
+                                <img src={car.img} alt="" />
+                              </div>
+                              <div
+                                className="absolute top-0 left-0 bg-black text-white w-20 h-10 text-xl flex justify-center items-center"
+                                style={{
+                                  clipPath: `polygon(0% 0%, 100% 0, 85% 50%, 100% 100%, 0% 100%)`,
+                                }}
+                              >
+                                {count}
+                              </div>
+                              <div className="relative p-5 z-10">
+                                <h4 className="text-primary font-secondary text-2xl font-bold capitalize">
+                                  {title}
+                                </h4>
+                              </div>
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
                       </div>
-                      <div
-                        className="absolute top-0 left-0 bg-black text-white w-20 h-10 text-xl flex justify-center items-center"
-                        style={{
-                          clipPath: `polygon(0% 0%, 100% 0, 85% 50%, 100% 100%, 0% 100%)`,
-                        }}
-                      >
-                        {count}
-                      </div>
-                      <div className="relative p-5 z-10">
-                        <h4 className="text-primary font-secondary text-2xl font-bold capitalize">
-                          {title}
-                        </h4>
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
-            );
-          })}
+                    );
+                  })}
+                </>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>

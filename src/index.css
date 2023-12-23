@@ -70,3 +70,17 @@ textarea:focus,
 .service-card:hover svg path {
   fill: white;
 }
+
+.blink {
+  animation: blink infinite 2s ease-in-out;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
