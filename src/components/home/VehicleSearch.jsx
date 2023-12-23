@@ -3,15 +3,15 @@ import carAbstract from '/images/car-abstract.png';
 
 const selectOptions = [
   {
-    title: 'Select Make:',
+    title: 'Select Make',
     options: ['nissan', 'dodge', 'subaru'],
   },
   {
-    title: 'Select Model:',
+    title: 'Select Model',
     options: ['grand caravan', 'nx', 'subaru'],
   },
   {
-    title: 'Select Year:',
+    title: 'Select Year',
     options: [
       '2023',
       '2022',
@@ -92,10 +92,15 @@ const VehicleSearch = () => {
                     onChange={(e) => stateSetter(e.target.value)}
                     className="bg-white p-3 rounded-lg focus:border-0 focus:outline-none w-full"
                   >
+                    <option className="uppercase" defaultValue={title} hidden>
+                      {title}
+                    </option>
                     {options.map((option, j) => (
-                      <option className="uppercase" value={option} key={j}>
-                        {option}
-                      </option>
+                      <>
+                        <option className="uppercase" value={option} key={j}>
+                          {option}
+                        </option>
+                      </>
                     ))}
                   </select>
                 </div>

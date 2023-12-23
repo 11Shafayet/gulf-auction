@@ -102,19 +102,22 @@ const PopularCars = () => {
                       <div key={i}>
                         <Swiper
                           modules={[Navigation]}
-                          //   navigation={{ nextEl: '.arrow-right', prevEl: '.arrow-left' }}
-                          navigation={true}
+                          navigation={{
+                            nextEl: '.arrow-right',
+                            prevEl: '.arrow-left',
+                          }}
+                          // navigation={true}
                           className="mySwiper relative overflow-hidden"
                         >
-                          {/* <div className="flex gap-x-4 justify-center items-center absolute top-4 right-4 z-100">
-                          <button className="arrow-left">
-                            <FaArrowLeft size={20} />
-                          </button>
-      
-                          <button className="arrow-right">
-                            <FaArrowRight size={20} />
-                          </button>
-                        </div> */}
+                          <div className="flex gap-x-4 justify-center items-center absolute top-4 right-4 z-[1000]">
+                            <button className="arrow-left bg-white p-3.5 rounded-full hover:bg-primary hover:text-white duration-300">
+                              <FaArrowLeft size={20} />
+                            </button>
+
+                            <button className="arrow-right bg-white p-3.5 rounded-full hover:bg-primary hover:text-white duration-300">
+                              <FaArrowRight size={20} />
+                            </button>
+                          </div>
                           {images.map((car, j) => (
                             <SwiperSlide
                               key={j}
@@ -132,7 +135,7 @@ const PopularCars = () => {
                               >
                                 {count}
                               </div>
-                              <div className="relative p-5 z-10">
+                              <div className="relative bottom-6 left-8 right-8 z-10">
                                 <h4 className="text-primary font-secondary text-2xl font-bold capitalize">
                                   {title}
                                 </h4>

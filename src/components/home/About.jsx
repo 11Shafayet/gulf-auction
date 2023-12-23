@@ -3,7 +3,7 @@ import aboutImage from '/images/about-car.png';
 const About = () => {
   return (
     <div
-      className="relative py-20 bg-secondary bg-cover bg-left bg-no-repeat z-10"
+      className="relative py-20 md:py-32 bg-secondary bg-cover bg-left bg-no-repeat z-10"
       style={{ backgroundImage: `url(${aboutImage})` }}
     >
       <div className="absolute inset-0 bg-white bg-opacity-50 -z-10 block lg:hidden" />
